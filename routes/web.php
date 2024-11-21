@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Athlete_BasketballController;
+use App\Http\ControllerBasketballController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,9 +21,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('basketball', Athlete_BasketballController::class);
+Route::resource('basketball', BasketballController::class);
 Route::resource('main', MainController::class);
-Route::get('basketball/sort/{sort_by}', [Athlete_BasketballController::class, 'index'])->name('basketball.sort');
+Route::get('basketball/sort/{sort_by}', [BasketballController::class, 'index'])->name('basketball.sort');
+
+Route::resource('organization', OrganizationController::class);
+Route::resource('event', EventController::class);
 
 
 require __DIR__.'/auth.php';
